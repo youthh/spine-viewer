@@ -72,8 +72,7 @@ export const parseSpineFiles = (filesList) => new Promise((resolve, reject) => {
   filesList
     .filter((fileObj) => fileObj.filename.toLowerCase().endsWith('.png')
       || fileObj.filename.toLowerCase().endsWith('.jpg')
-      || fileObj.filename.toLowerCase().endsWith('.webp')
-      || fileObj.filename.toLowerCase().endsWith('.avif'))
+      || fileObj.filename.toLowerCase().endsWith('.webp'))
     .forEach((fileObj) => {
       const resName = cachedName + fileObj.filename;
       const resource = new PIXI.LoaderResource(resName, '');
