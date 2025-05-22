@@ -37,6 +37,7 @@ export default {
   components: {
     AppImageResource,
   },
+
   computed: {
     webGLNotSupported() {
       return !utils.isWebGLSupported();
