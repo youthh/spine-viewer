@@ -38,6 +38,7 @@ export const skins = (state) => {
 };
 
 export const currentAnimation = (state) => state.currentAnimation;
+export const isSetAnim = (state) => state.isSetAnim;
 
 // debug events
 export const showStart = (state) => state.showEventStart;

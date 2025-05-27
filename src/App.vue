@@ -46,7 +46,7 @@ html, body {
 #main-container {
   height: 100%;
   .el-main {
-    overflow: hidden;
+    //overflow: hidden;
     padding: 0;
   }
   /*
