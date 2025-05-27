@@ -31,6 +31,7 @@
           <a href="../pixi-spine-viewer-5x-3_8/">Pixi v5.x & Spine 3.8 is here</a>
         </p>
         <br>
+      <div>
         <el-collapse>
           <the-side-panel-spine-props />
         </el-collapse>
@@ -43,6 +44,7 @@
         <el-collapse>
           <the-side-panel-slot-containers/>
         </el-collapse>
+      </div>
       </el-main>
     </el-container>
   </el-aside>

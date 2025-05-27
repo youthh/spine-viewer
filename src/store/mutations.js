@@ -16,7 +16,9 @@ export default {
   changeImgPos(state, pos) {
     state.pos = pos;
   },
-
+  setIsAnimationSet(state, isSet) {
+    state.isSetAnim = isSet;
+  },
   // customisation
   setScale(state, value) {
     state.scale = value;

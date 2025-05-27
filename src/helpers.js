@@ -25,7 +25,8 @@ export const eventBus = new Vue();
  * @param {string} extName
  */
 const findByExtension = (filesList, extName) => {
-  const result = filesList.find((fileObj) => fileObj.filename.toLowerCase().endsWith(extName));
+  const result = filesList.find((fileObj) => fileObj.filename.toLowerCase()
+    .endsWith(extName));
   if (!result) throw new Error(`File with extension ${extName} no found`);
   return result;
 };
@@ -70,9 +71,13 @@ export const parseSpineFiles = (filesList) => new Promise((resolve, reject) => {
 
   const cachedName = `${rawSpineData.filename}_atlas_page_`;
   filesList
-    .filter((fileObj) => fileObj.filename.toLowerCase().endsWith('.png')
-      || fileObj.filename.toLowerCase().endsWith('.jpg')
-      || fileObj.filename.toLowerCase().endsWith('.webp'))
+    .filter((fileObj) => fileObj.filename.toLowerCase()
+      .endsWith('.png')
+      || fileObj.filename.toLowerCase()
+        .endsWith('.jpg')
+      || fileObj.filename.toLowerCase()
+        .endsWith('.webp') || fileObj.filename.toLowerCase()
+      .endsWith('.avif'))
     .forEach((fileObj) => {
       const resName = cachedName + fileObj.filename;
       const resource = new PIXI.LoaderResource(resName, '');
@@ -151,7 +156,7 @@ export const namesToTree = (paths) => {
     .reduce((items, path) => {
       const names = path.split('/');
       names.reduce((q, name) => {
-      // eslint-disable-next-line no-shadow
+        // eslint-disable-next-line no-shadow
         let item = q.find((o) => o.value === name);
         if (!item) {
           q.push(item = {

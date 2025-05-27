@@ -8,7 +8,7 @@
       <div id="render">Use: {{isCurrentWebGl ? 'WebGL' : 'Canvas2d'}}</div>
       <!--<div id="cursorPos">x:{{mousePos.x}}, y: {{mousePos.y}}</div>-->
     </div>
-    <div class="progress-container">
+    <div v-if="isSetAnimation"  class="progress-container">
       <div class="progress-time">
         {{ currentTime.toFixed(2) }}s / {{ totalTime.toFixed(2) }}s
       </div>
@@ -82,6 +82,9 @@ export default {
   computed: {
     stageBGColor() {
       return parseInt(this.stageColor.replace(/^#/, ''), 16);
+    },
+    isSetAnimation() {
+      return this.$store.getters.isSetAnim;
     },
     ...mapGetters([
       'stageColor',
@@ -320,6 +323,7 @@ export default {
       if (hasData) {
         this.spineEl = new SpineElement(getSpineData());
         this.$store.commit('setSlotContainer', this.spineEl.slotContainers);
+        this.$store.commit('setIsAnimationSet', true);
       }
 
       if (this.spineEl) {
@@ -614,14 +618,14 @@ export default {
   }
 
   .progress-time {
-    top: -10px;
+    top: -11px;
     position: absolute;
     white-space: nowrap;
-    font-size: 17px;
+    font-size: 20px;
     margin-top: 4px;
-    text-align: right;
-    color: #333;
+    color: #bdbdbd;
     left: 50%;
     right: 50%;
+    font-weight: bold;
   }
 </style>
