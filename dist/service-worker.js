@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pixi-spine-viewer/precache-manifest.5f6fcf09f28fb67861fc3434ea4489cf.js"
+  "precache-manifest.ddb554e6b326155aef91c55b255b0cc9.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "pixi-spine-viewer"});
