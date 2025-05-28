@@ -1,6 +1,6 @@
 <template>
   <el-collapse-item>
-    <div  slot="title">
+    <div slot="title">
       <i class="el-icon-view"></i>&nbsp;
       <b class="panel-group-title">Animations</b>
     </div>

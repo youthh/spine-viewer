@@ -8,7 +8,50 @@
       size="mini"
       label-width="100px"
     >
-
+      <el-form-item
+        label="Render Type"
+      >
+        <el-radio-group v-model="renderType">
+          <el-radio label="WebGL" :disabled="webGLNotSupported"></el-radio>
+          <el-radio label="Canvas2d"></el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item
+        label="Zoom"
+      >
+        <el-slider
+          v-model="zoom"
+          :min="0.01"
+          :max="5"
+          :step="0.01"
+          show-input
+          input-size="mini"
+        />
+      </el-form-item>
+      <el-form-item
+        label="Position"
+      >
+        <el-col :div="12">
+          X:
+          <el-input-number
+            size="mini"
+            :precision="1"
+            v-model="posX"
+            :min="-2000"
+            :max="2000"
+          />
+        </el-col>
+        <el-col :div="12">
+          Y:
+          <el-input-number
+            size="mini"
+            :precision="1"
+            v-model="posY"
+            :min="-2000"
+            :max="2000"
+          />
+        </el-col>
+      </el-form-item>
       <el-form-item label="Picture">
         <app-image-resource
           id="bgImage"
@@ -20,7 +63,9 @@
           @onReset="$_handleSceneImageDelete"
         />
       </el-form-item>
-
+      <el-form-item label="BG color">
+        <el-color-picker v-model="bgColor" />
+      </el-form-item>
     </el-form>
   </el-collapse-item>
 </template>
@@ -29,7 +74,6 @@
 
 import { RENDERER_TYPE, utils } from 'pixi.js';
 import { mapGetters } from 'vuex';
-import { stageImgData, stageImgFile } from '@/store/getters';
 import AppImageResource from './AppImageResource.vue';
 
 export default {
@@ -63,34 +107,16 @@ export default {
       },
     },
     zoom: {
-      get() {
-        return this.$store.getters.zoom;
-      },
-      set(v) {
-        this.$store.commit('setZoom', v);
-      },
+      get() { return this.$store.getters.zoom; },
+      set(v) { this.$store.commit('setZoom', v); },
     },
     posX: {
-      get() {
-        return this.$store.getters.pos.x;
-      },
-      set(x) {
-        this.$store.commit('changeImgPos', {
-          x,
-          y: this.posY,
-        });
-      },
+      get() { return this.$store.getters.pos.x; },
+      set(x) { this.$store.commit('changeImgPos', { x, y: this.posY }); },
     },
     posY: {
-      get() {
-        return this.$store.getters.pos.y;
-      },
-      set(y) {
-        this.$store.commit('changeImgPos', {
-          y,
-          x: this.posX,
-        });
-      },
+      get() { return this.$store.getters.pos.y; },
+      set(y) { this.$store.commit('changeImgPos', { y, x: this.posX }); },
     },
     ...mapGetters([
       'stageImgFile',
@@ -98,8 +124,6 @@ export default {
     ]),
   },
   methods: {
-    stageImgFile,
-    stageImgData,
     $_handleSceneImageDelete() {
       this.$store.commit('changeStageImg', {
         fileData: '',

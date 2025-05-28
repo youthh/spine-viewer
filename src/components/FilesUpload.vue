@@ -1,11 +1,11 @@
 <template>
   <div
-    ref="wrapper"
+      ref="wrapper"
   >
     <label
-      :for="id"
-      v-show="!isSelected && !isLoading"
-      ref="inputLabel"
+        :for="id"
+        v-show="!isSelected && !isLoading"
+        ref="inputLabel"
     >
     </label>
     <el-tooltip>
@@ -15,9 +15,9 @@
         *.json, *.atlas & *.png files
       </div>
       <el-button
-        type="primary"
-        v-show="!isSelected && !isLoading"
-        @click="$_onOpenClick"
+          type="primary"
+          v-show="!isSelected && !isLoading"
+          @click="$_onOpenClick"
       >
         Upload Files
       </el-button>
@@ -25,10 +25,9 @@
 
     <div v-show="isLoading">
       <el-button
-        :loading="true"
-        type="primary"
-      >{{ loaded }}%
-      </el-button>
+          :loading="true"
+          type="primary"
+      >{{loaded}}%</el-button>
     </div>
 
     <div class="" v-show="isSelected && !isLoading">
@@ -36,13 +35,12 @@
         <div slot="content">
           <div v-for="filename in selectedFileNames"
                :key="filename"
-          >{{ filename }}
-          </div>
+          >{{filename}}</div>
         </div>
         <el-button
-          type="primary"
-          icon="el-icon-delete"
-          @click="reset"
+            type="primary"
+            icon="el-icon-delete"
+            @click="reset"
         >
           Clear
         </el-button>
@@ -50,29 +48,28 @@
     </div>
 
     <el-alert
-      v-show="errText !== ''"
-      :title="errText"
-      type="error"
-      v-on:close="errText = ''"
-      show-icon>
+        v-show="errText !== ''"
+        :title="errText"
+        type="error"
+        v-on:close="errText = ''"
+        show-icon>
     </el-alert>
 
     <input
-      ref="input"
-      type="file"
-      :id="id"
-      :accept="accept"
-      multiple
-      class="app-image-res__input"
-      @change="$_handleFileChange"
+        ref="input"
+        type="file"
+        :id="id"
+        :accept="accept"
+        multiple
+        class="app-image-res__input"
+        @change="$_handleFileChange"
     />
   </div>
 </template>
 
 <script>
 
-const endsWith = (extName) => (file) => file.name.toLowerCase()
-  .endsWith(extName);
+const endsWith = (extName) => (file) => file.name.toLowerCase().endsWith(extName);
 
 export default {
   name: 'FilesUpload',

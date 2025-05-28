@@ -23,8 +23,9 @@ export const changeUploadSource = ({ commit }, source) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export const parseFiles = ({ commit }, filesList) => parseSpineFiles(filesList)
-  .then(async (result) => {
+  .then((result) => {
     storeSpineData(result.spineData);
+
     commit('setSpineData', !!result.spineData);
     commit('setCurrentSkin', result.spineData.defaultSkin ? result.spineData.defaultSkin.name : result.spineData.skins[0].name);
   });

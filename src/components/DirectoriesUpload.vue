@@ -28,17 +28,15 @@
       <el-button
         :loading="true"
         type="primary"
-      >{{ loaded }}%
-      </el-button>
+      >{{loaded}}%</el-button>
     </div>
 
     <div class="" v-show="isSelected && !isLoading">
       <el-tooltip>
         <div slot="content">
           <div v-for="filename in selectedFileNames"
-               :key="filename"
-          >{{ filename }}
-          </div>
+              :key="filename"
+          >{{filename}}</div>
         </div>
         <el-button
           type="primary"
@@ -77,11 +75,11 @@
         <p class="versionDescription">Version: </p>
         <label class="radioButtonVersion">
           <input type="radio" id="1.0" name="1.0" value="1.0" v-model="radioCheck"
-                 @change="$_uploadNewVersionOfFiles" />1.0
+                 @change="$_uploadNewVersionOfFiles"/>1.0
         </label>
         <label class="radioButtonVersion">
           <input type="radio" id="0.6" name="0.6" value="0.6" v-model="radioCheck"
-                 @change="$_uploadNewVersionOfFiles" />0.6
+                 @change="$_uploadNewVersionOfFiles"/>0.6
         </label>
       </div>
     </div>
@@ -89,7 +87,7 @@
     <div class="spanNamesContainer" v-show="options.length > 1">
       <p class="spanNameLabel">Spine: </p>
       <Select @change="$_onSpineChange"
-              v-model="value" value-key="label" placeholder="Spine name">
+        v-model="value" value-key="label" placeholder="Spine name">
         <Option
           v-for="item in options"
           :key="item.label"
@@ -105,8 +103,7 @@
 
 import { Select, Option } from 'element-ui';
 
-const endsWith = (extName) => (file) => file.name.toLowerCase()
-  .endsWith(extName);
+const endsWith = (extName) => (file) => file.name.toLowerCase().endsWith(extName);
 
 export default {
   name: 'FilesUpload',
@@ -354,22 +351,21 @@ export default {
       const { items } = e.dataTransfer;
       e.preventDefault();
 
-      this.getFilesDataTransferItems(items)
-        .then((files) => {
-          this.errText = '';
+      this.getFilesDataTransferItems(items).then((files) => {
+        this.errText = '';
 
-          const fileList = files;
+        const fileList = files;
 
-          if (fileList.length === 0) {
-            return false;
-          }
+        if (fileList.length === 0) {
+          return false;
+        }
 
-          this.reset();
+        this.reset();
 
-          this.$_handleFileChange(fileList);
+        this.$_handleFileChange(fileList);
 
-          return true;
-        });
+        return true;
+      });
     },
     getFilesDataTransferItems(dataTransferItems) {
       const files = [];
@@ -381,10 +377,9 @@ export default {
             this.traverseFileTreePromise(it.webkitGetAsEntry(), null, files),
           );
         }
-        Promise.all(entriesPromises)
-          .then(() => {
-            resolve(files);
-          });
+        Promise.all(entriesPromises).then(() => {
+          resolve(files);
+        });
       });
     },
     traverseFileTreePromise(item, path = '', folder) {
@@ -449,53 +444,45 @@ export default {
 </script>
 
 <style scoped lang="scss">
-input[type=file] {
-  display: none;
-}
-
-p[class=versionDescription] {
-  padding: 0;
-  margin: 0;
-}
-
-div[class=versionToggle] {
-  position: absolute;
-  top: 40px;
-  left: -133px;
-  display: flex;
-  flex-direction: column;
-}
-
-div[class=rowRadioButton] {
-  display: flex;
-  flex-direction: row;
-  column-gap: 10px;
-}
-
-label[class=radioButtonVersion] {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-div[class=spanNamesContainer] {
-  position: absolute;
-  top: 65px;
-  left: -133px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-p[class=spanNameLabel] {
-  white-space: pre;
-}
-
-div[class=invisibleMargin] {
-  height: 60px;
-}
-
-div[class=invisibleMarginSmall] {
-  height: 20px;
-}
+  input[type=file] {
+    display: none;
+  }
+  p[class=versionDescription] {
+    padding: 0;
+    margin: 0;
+  }
+  div[class=versionToggle] {
+    position: absolute;
+    top: 40px;
+    left: -133px;
+    display: flex;
+    flex-direction: column;
+  }
+  div[class=rowRadioButton] {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+  }
+  label[class=radioButtonVersion] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  div[class=spanNamesContainer] {
+    position: absolute;
+    top: 65px;
+    left: -133px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  p[class=spanNameLabel] {
+    white-space: pre;
+  }
+  div[class=invisibleMargin] {
+    height: 60px;
+  }
+  div[class=invisibleMarginSmall] {
+    height: 20px;
+  }
 </style>

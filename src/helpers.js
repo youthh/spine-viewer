@@ -25,8 +25,7 @@ export const eventBus = new Vue();
  * @param {string} extName
  */
 const findByExtension = (filesList, extName) => {
-  const result = filesList.find((fileObj) => fileObj.filename.toLowerCase()
-    .endsWith(extName));
+  const result = filesList.find((fileObj) => fileObj.filename.toLowerCase().endsWith(extName));
   if (!result) throw new Error(`File with extension ${extName} no found`);
   return result;
 };
@@ -156,7 +155,7 @@ export const namesToTree = (paths) => {
     .reduce((items, path) => {
       const names = path.split('/');
       names.reduce((q, name) => {
-        // eslint-disable-next-line no-shadow
+      // eslint-disable-next-line no-shadow
         let item = q.find((o) => o.value === name);
         if (!item) {
           q.push(item = {
