@@ -17,5 +17,3 @@ new Vue({
 
 // eslint-disable-next-line no-underscore-dangle,no-unused-expressions
 window.__PIXI_INSPECTOR_GLOBAL_HOOK__ && window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI });
-// eslint-disable-next-line no-underscore-dangle,no-unused-expressions
-window.__PIXI_APP__ = App;

@@ -132,7 +132,8 @@ export default {
     this.wrapper = new PIXI.Sprite();
     this.wrapper.name = 'wrapper';
     this.wrapper.anchor.set(0.5, 0.5);
-
+    this.stage.interactiveChildren = true;
+    // this.stage.interactive = true;
     this.stage.addChild(this.wrapper);
     makeDraggableByRightButton(this.wrapper);
     this.progressEl = new PIXI.Graphics();
@@ -254,7 +255,6 @@ export default {
       if (this.interaction) {
         this.interaction.removeEvents();
       }
-
       this.renderer = isWebGL ? this.webGLRenderer : this.canvasRenderer;
       this.interaction = this.renderer.plugins.interaction;
       this.interaction.setTargetElement(this.renderer.view, this.renderer.resolution);
@@ -329,6 +329,7 @@ export default {
       if (this.spineEl) {
         this.spineEl.name = 'spineEl';
         this.wrapper.addChild(this.spineEl);
+
         this.$_addSpineListeners();
       }
     },
@@ -627,5 +628,13 @@ export default {
     left: 50%;
     right: 50%;
     font-weight: bold;
+  }
+
+  .webgl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: auto;
   }
 </style>
