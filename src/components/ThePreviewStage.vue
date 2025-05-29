@@ -630,11 +630,4 @@ export default {
     font-weight: bold;
   }
 
-  .webgl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    pointer-events: auto;
-  }
 </style>
