@@ -1,4 +1,8 @@
 export default {
+  // multimedia
+  setIsPlaying(state, isPlaying) {
+    state.isPlaying = isPlaying;
+  },
   // slot containers
   setSlotContainer(state, slotContainer) {
     state.slotContainer = slotContainer;

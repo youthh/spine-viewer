@@ -37,6 +37,7 @@ const state = {
   uploadSource: '',
   slotContainer: [],
   isSetAnim: false,
+  isPlaying: true,
 };
 
 export default new Vuex.Store({

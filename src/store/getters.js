@@ -4,6 +4,9 @@ import { getSpineData } from '@/helpers';
 // Slot Containers
 export const slotContainer = (state) => state.slotContainer;
 
+// multimedia
+export const isPlaying = (state) => state.isPlaying;
+
 export const stageColor = (state) => state.stageColor;
 export const stageRenderType = (state) => state.renderType;
 export const zoom = (state) => state.zoom;
