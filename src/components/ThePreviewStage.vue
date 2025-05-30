@@ -37,7 +37,7 @@ import {
   EVENT_RESET_SETUP_POSE,
   TYPE_SLOTS,
   TYPE_BONES,
-  getSpineData,
+  getSpineData, EVENT_PAUSE_ANIMATION, EVENT_SHIFT_ANIMATION,
 } from '../helpers';
 import SpineElement from '../plugins/SpineElement';
 import {
@@ -210,6 +210,8 @@ export default {
     eventBus.$off(EVENT_SET_ANIMATION, this.setAnimation);
     eventBus.$off(EVENT_RESET_TRACK, this.clearTrack);
     eventBus.$off(EVENT_RESET_TRACKS, this.clearTracks);
+    eventBus.$off(EVENT_PAUSE_ANIMATION, this.pauseAnimation);
+    eventBus.$off(EVENT_SHIFT_ANIMATION, this.shiftAnimation);
 
     if (this.spineEl) {
       this.wrapper.removeChild(this.spineEl);
@@ -441,7 +443,28 @@ export default {
           animationName,
           this.$store.getters.loop,
         );
+        this.spineEl.state.timeScale = 1;
+        this.$store.commit('setIsPlaying', Boolean(this.spineEl.state.timeScale));
       }
+    },
+    pauseAnimation(animationName) {
+      if (this.$_canPlayAnimation(animationName)) {
+        this.spineEl.state.timeScale = this.spineEl.state.timeScale ? 0 : 1;
+        this.$store.commit('setIsPlaying', Boolean(this.spineEl.state.timeScale));
+      }
+    },
+    shiftAnimation(deltaSeconds) {
+      const { tracks } = this.spineEl.state;
+
+      for (let i = 0; i < tracks.length; i += 1) {
+        const trackEntry = tracks[i];
+        // eslint-disable-next-line no-continue
+        if (!trackEntry) continue;
+
+        trackEntry.trackTime += deltaSeconds;
+      }
+
+      this.spineEl.skeleton.updateWorldTransform();
     },
     clearTracks() {
       if (!this.spineEl) return;
@@ -504,9 +527,12 @@ export default {
 
       eventBus.$on(EVENT_ADD_ANIMATION, this.addAnimation);
       eventBus.$on(EVENT_SET_ANIMATION, this.setAnimation);
+      eventBus.$on(EVENT_PAUSE_ANIMATION, this.pauseAnimation);
       eventBus.$on(EVENT_RESET_TRACK, this.clearTrack);
       eventBus.$on(EVENT_RESET_TRACKS, this.clearTracks);
       eventBus.$on(EVENT_RESET_SETUP_POSE, this.setToSetupPose);
+      eventBus.$on(EVENT_SHIFT_ANIMATION, this.shiftAnimation);
+      eventBus.$on(EVENT_SHIFT_ANIMATION, this.shiftAnimation);
 
       const addWrapperPosWatcher = () => this.$store.watch(
         (state) => state.pos,

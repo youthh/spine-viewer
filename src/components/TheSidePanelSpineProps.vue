@@ -174,6 +174,35 @@
           </el-button-group>
         </el-col>
       </el-form-item>
+      <el-form-item label="Multimedia">
+        <el-col   :offset=2 >
+          <el-tooltip content="Shift anim left">
+            <el-button
+                icon="el-icon-arrow-left"
+                :disabled="!hasSpineData"
+                @click="$_shiftAnimationLeft"
+            />
+          </el-tooltip>
+          <el-tooltip content="Pause animation">
+            <el-button
+                icon="el-icon-video-pause"
+                :disabled="!hasSpineData"
+                :style="{
+                    backgroundColor: isPlaying ? '' : '#e7e7e7',
+                    boxShadow: isPlaying ? '' : 'rgba(0, 0, 0, 0.2) 0px 0px 5px 2px inset'
+                 }"
+                @click="$_pauseAnimation"
+            />
+          </el-tooltip>
+          <el-tooltip content="Shift anim right">
+            <el-button
+                icon="el-icon-arrow-right"
+                :disabled="!hasSpineData"
+                @click="$_shiftAnimationRight"
+            />
+          </el-tooltip>
+        </el-col>
+      </el-form-item>
     </el-form>
   </el-collapse-item>
 </template>
@@ -191,7 +220,7 @@ import {
   TYPE_SLOTS,
   TYPE_BONES,
   EVENT_RESET_SETUP_POSE,
-  namesToTree,
+  namesToTree, EVENT_PAUSE_ANIMATION, EVENT_SHIFT_ANIMATION,
 } from '../helpers';
 
 export default {
@@ -249,6 +278,7 @@ export default {
       'getTracks',
       'hasSpineData',
       'skins',
+      'isPlaying',
     ]),
   },
   data() {
@@ -300,6 +330,9 @@ export default {
     $_setAnimation() {
       eventBus.$emit(EVENT_SET_ANIMATION, this.animation);
     },
+    $_pauseAnimation() {
+      eventBus.$emit(EVENT_PAUSE_ANIMATION, this.animation);
+    },
     $_setSetupPose(updateType) {
       eventBus.$emit(EVENT_RESET_SETUP_POSE, updateType);
     },
@@ -308,6 +341,12 @@ export default {
     },
     $_resetAllTracks() {
       eventBus.$emit(EVENT_RESET_TRACKS);
+    },
+    $_shiftAnimationRight() {
+      eventBus.$emit(EVENT_SHIFT_ANIMATION, 0.008);
+    },
+    $_shiftAnimationLeft() {
+      eventBus.$emit(EVENT_SHIFT_ANIMATION, -0.008);
     },
     // $_toggleAnimation(animationName) {
     //   let newValue = animationName;

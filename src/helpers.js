@@ -10,9 +10,11 @@ import { imageLoaderAdapter } from '@pixi-spine/loader-base';
 
 export const EVENT_ADD_ANIMATION = 'EVENT_ADD_ANIMATION';
 export const EVENT_SET_ANIMATION = 'EVENT_SET_ANIMATION';
+export const EVENT_PAUSE_ANIMATION = 'EVENT_PAUSE_ANIMATION';
 export const EVENT_RESET_TRACK = 'EVENT_RESET_TRACK';
 export const EVENT_RESET_TRACKS = 'EVENT_RESET_TRACKS';
 export const EVENT_RESET_SETUP_POSE = 'EVENT_RESET_SETUP_POSE';
+export const EVENT_SHIFT_ANIMATION = 'EVENT_SHIFT_ANIMATION';
 
 export const TYPE_SLOTS = 1;
 export const TYPE_BONES = 2;
