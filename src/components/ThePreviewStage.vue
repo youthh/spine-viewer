@@ -4,16 +4,16 @@
     <canvas ref="previewStageWebGL" class="webgl"></canvas>
     <canvas ref="previewStageCanvas2d" class="canvas2d"></canvas>
     <div class="stageInfo">
-      <div id="framerate">FPS: {{curFPS.toFixed(0)}}</div>
-      <div id="render">Use: {{isCurrentWebGl ? 'WebGL' : 'Canvas2d'}}</div>
+      <div id="framerate">FPS: {{ curFPS.toFixed(0) }}</div>
+      <div id="render">Use: {{ isCurrentWebGl ? "WebGL" : "Canvas2d" }}</div>
       <!--<div id="cursorPos">x:{{mousePos.x}}, y: {{mousePos.y}}</div>-->
     </div>
-    <div v-if="isSetAnimation"  class="progress-container">
+    <div v-if="isSetAnimation" class="progress-container">
       <div class="progress-time">
         {{ currentTime.toFixed(2) }}s / {{ totalTime.toFixed(2) }}s
       </div>
     </div>
-<!--    div-->
+    <!--    div-->
   </div>
 </template>
 
@@ -65,10 +65,17 @@ const defineTextStyleByType = (type) => {
   };
 
   switch (type) {
-    case msgTypeOrange: style.fill = '#ffcb0c'; break;
-    case msgTypeGreen: style.fill = '#03ff6e'; break;
-    case msgTypeRed: style.fill = '#ff6604'; break;
-    default: break;
+    case msgTypeOrange:
+      style.fill = '#ffcb0c';
+      break;
+    case msgTypeGreen:
+      style.fill = '#03ff6e';
+      break;
+    case msgTypeRed:
+      style.fill = '#ff6604';
+      break;
+    default:
+      break;
   }
 
   return style;
@@ -126,6 +133,8 @@ export default {
 
     const stageIsWebGL = this.stageRenderType === PIXI.RENDERER_TYPE.WEBGL;
     const useWebGL = stageIsWebGL && PIXI.utils.isWebGLSupported();
+    // eslint-disable-next-line no-underscore-dangle
+    window.__PIXI_RENDERER__ = this.webGLRenderer;
 
     this.stage = new PIXI.Container();
     this.stage.name = 'stage';
@@ -241,7 +250,8 @@ export default {
     preventDef(e) {
       e.preventDefault();
     },
-    handleResize() {},
+    handleResize() {
+    },
     switchRenderType(isWebGL) {
       if (isWebGL) {
         this.$refs.previewStageCanvas2d.style.display = 'none';
@@ -485,9 +495,15 @@ export default {
     setToSetupPose(updateType) {
       if (!this.spineEl) return;
       switch (updateType) {
-        case TYPE_SLOTS: this.spineEl.skeleton.setSlotsToSetupPose(); break;
-        case TYPE_BONES: this.spineEl.skeleton.setBonesToSetupPose(); break;
-        default: this.spineEl.skeleton.setToSetupPose(); break;
+        case TYPE_SLOTS:
+          this.spineEl.skeleton.setSlotsToSetupPose();
+          break;
+        case TYPE_BONES:
+          this.spineEl.skeleton.setBonesToSetupPose();
+          break;
+        default:
+          this.spineEl.skeleton.setToSetupPose();
+          break;
       }
     },
     flipX(isFlipped) {
@@ -611,49 +627,51 @@ export default {
 </script>
 
 <style scoped>
-  .preview-el {
-    position: relative;
-  }
-  canvas, .preview-el {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
+.preview-el {
+  position: relative;
+}
 
-  .stageInfo {
-    width: 110px;
-    position: absolute;
-    padding: 4px 8px;
-    background: rgba(0,0,0,0.3);
-    color: rgba(255,255,255,0.8);
-    font-family: "Lucida Console",Monaco,monospace;
-    letter-spacing: 1px;
-    font-size: 10px;
-    line-height: 1.6;
-    pointer-events: none;
-    z-index: 2;
-    user-select: none;
-    left: 0;
-    top: 0;
-  }
-  .progress-container {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    height: 20px;
-    width: 100%;
-  }
+canvas, .preview-el {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-  .progress-time {
-    top: -11px;
-    position: absolute;
-    white-space: nowrap;
-    font-size: 20px;
-    margin-top: 4px;
-    color: #bdbdbd;
-    left: 50%;
-    right: 50%;
-    font-weight: bold;
-  }
+.stageInfo {
+  width: 110px;
+  position: absolute;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Lucida Console", Monaco, monospace;
+  letter-spacing: 1px;
+  font-size: 10px;
+  line-height: 1.6;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+  left: 0;
+  top: 0;
+}
+
+.progress-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  height: 20px;
+  width: 100%;
+}
+
+.progress-time {
+  top: -11px;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 20px;
+  margin-top: 4px;
+  color: #bdbdbd;
+  left: 50%;
+  right: 50%;
+  font-weight: bold;
+}
 
 </style>
