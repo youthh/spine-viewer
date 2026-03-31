@@ -3,6 +3,7 @@
     <el-container id="main-container">
       <el-container>
         <el-main>
+          <app-redirect-notice url="https://andryuha-ka.github.io/spineviewer/" :delay="10000" />
           <the-preview-stage />
         </el-main>
       </el-container>
@@ -15,12 +16,14 @@
 
 import ThePreviewStage from './components/ThePreviewStage.vue';
 import TheSidePanel from './components/TheSidePanel.vue';
+import AppRedirectNotice from './components/Redirect.vue';
 
 export default {
   name: 'app',
   components: {
     TheSidePanel,
     ThePreviewStage,
+    AppRedirectNotice,
   },
 };
 </script>
