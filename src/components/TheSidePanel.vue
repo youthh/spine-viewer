@@ -27,8 +27,8 @@
           Pixi-Spine v{{PIXI_SPINE_VERSION}} / 4.1)
 
           <br>
-          <a href="../pixi-spine-viewer-4x-3_7/">Pixi v4.x & Spine 3.7 is here</a><br>
-          <a href="../pixi-spine-viewer-5x-3_8/">Pixi v5.x & Spine 3.8 is here</a>
+          <a href="https://spineviewer37.vercel.app/">Pixi v4.x & Spine 3.7 is here</a><br>
+          <a href="https://spineviewer38.vercel.app/">Pixi v5.x & Spine 3.8 is here</a>
         </p>
         <br>
         <el-collapse>
